@@ -1,0 +1,20 @@
+# 载入分词包
+require(Rwordseg)
+# 读取文本
+test<-readLines("night.txt",encoding='UTF-8')
+# 剔除空格
+res=test[test!=" "]
+# 对文本分词
+words=unlist(lapply(X=res,FUN=segmentCN))
+# 给每个词，根据顺序，赋顺序值
+word=lapply(X=words,FUN=strsplit," ")
+# 计算每个词的频率
+v=table(unlist(word))
+
+v=sort(v,decreasing=T)
+v[1:100]
+head(v)
+
+d=data.frame(word=names(v),freq=v)
+
+
